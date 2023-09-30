@@ -1,9 +1,9 @@
-(\* = Adicionar teste de snapshot)
+($ = Adicionar teste de snapshot)
 
 # MVP Front-End
 
-- [ ] Página de criação de listas \*
-- [ ] Página de gerenciamento de listas \*
+- [ ] Página de criação de listas $
+- [ ] Página de gerenciamento de listas $
   - [ ] Filtrar listas por estado: Ativas, Feitas, Excluídas
 - [ ] Usuário falso para testes (futuramente, criá-lo no banco de dados para o resto dos testes e duplicar os dados — presente tanto na suite de testes quanto no banco de dados)
 - [ ] "Imprimir" listas para um formato para copiar e colar no whatsapp\telegram
