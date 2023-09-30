@@ -1,11 +1,5 @@
-import './App.css'
-
 function App() {
-  return (
-    <>
-    Fala aê, cuzão
-    </>
-  )
+  return <h1 className=''>Olá, mundo</h1>;
 }
 
-export default App
+export default App;
