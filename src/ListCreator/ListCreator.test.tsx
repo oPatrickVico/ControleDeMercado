@@ -11,9 +11,12 @@ describe('ListCreator', () => {
   );
 
   it('loads', () => {
-    expect(screen.getByText(/Criar uma nova lista:/i)).toBeDefined();
-    expect(screen.getByLabelText(/Nome:/i)).toBeDefined()
-    expect(screen.getByLabelText(/Qtd:/i)).toBeDefined()
-    expect(screen.getByLabelText(/Uni:/i)).toBeDefined()
+    expect(
+      screen.getByRole('heading', { name: /Criar uma nova lista:/i })
+    ).toBeDefined();
+    expect(screen.getByLabelText(/Nome:/i)).toBeDefined();
+    expect(screen.getByLabelText(/Qtd:/i)).toBeDefined();
+    expect(screen.getByLabelText(/Uni:/i)).toBeDefined();
+    expect(screen.getByRole('button', { name: 'submit' })).toBeDefined();
   });
 });
