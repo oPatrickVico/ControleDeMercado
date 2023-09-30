@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react';
 
 type ListEntry = {
-  title: string;
+  entryName: string;
   quantity: string;
   units: string;
 };
@@ -14,12 +14,13 @@ export default function ListCreator() {
     const target = e.target as HTMLFormElement;
     const data = new FormData(target);
     const entry: ListEntry = {
-      title: data.get('title')?.toString() ?? '',
+      entryName: data.get('entryName')?.toString() ?? '',
       quantity: data.get('quantity')?.toString() ?? '',
       units: data.get('units')?.toString() ?? '',
     };
     setEntries((arr) => arr.concat(entry));
     target.reset();
+    (document.querySelector('input[name="entryName"]') as HTMLElement).focus();
   };
 
   return (
@@ -33,7 +34,7 @@ export default function ListCreator() {
               <td>
                 <label>
                   Nome:&nbsp;
-                  <input type="text" name="title" />
+                  <input type="text" name="entryName" />
                 </label>
               </td>
               <td>
@@ -59,10 +60,10 @@ export default function ListCreator() {
   );
 }
 
-const EntryDisplay: React.FC<ListEntry> = ({ title, quantity, units }) => {
+const EntryDisplay: React.FC<ListEntry> = ({ entryName, quantity, units }) => {
   return (
     <tr>
-      <td>{title}</td>
+      <td>{entryName}</td>
       <td>{quantity}</td>
       <td>{units}</td>
     </tr>
@@ -73,7 +74,7 @@ const EntriesBuilder: React.FC<{ entries: ListEntry[] }> = ({ entries }) => {
   return entries.map((entry: ListEntry, idx: number) => (
     <EntryDisplay
       key={idx}
-      title={entry.title}
+      entryName={entry.entryName}
       quantity={entry.quantity}
       units={entry.units}
     />
