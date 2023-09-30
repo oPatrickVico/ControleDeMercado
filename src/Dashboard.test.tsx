@@ -1,20 +1,24 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+
 import { render, screen } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
+import '@testing-library/jest-dom';
+
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 
-describe('App', () => {
-  render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>
-  );
+beforeEach(() => {
+  render(<App />, { wrapper: MemoryRouter });
+});
 
-  it('routes to /newList', () => {
+describe('Dashboard', () => {
+  const user = userEvent.setup();
+
+  it('routes to /newList', async () => {
     const link = screen.getByText(/Nova lista/i);
 
-    link.click();
+    await user.click(link);
 
-    expect(screen.getByText(/Criar uma nova lista/)).toBeDefined();
+    expect(screen.getByText(/Criar uma nova lista:/i)).toBeInTheDocument();
   });
 });
