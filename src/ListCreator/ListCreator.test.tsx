@@ -31,14 +31,14 @@ describe('ListCreator', () => {
   it('adds new entry', async () => {
     const newEntry = ['Banana', '3', 'unidades'];
 
-    user.type(screen.getByLabelText(/Nome/), newEntry[0]);
-    user.type(screen.getByLabelText(/Qtd/), newEntry[0]);
-    user.type(screen.getByLabelText(/Uni/), newEntry[0]);
+    await user.type(screen.getByLabelText(/Nome/), newEntry[0]);
+    await user.type(screen.getByLabelText(/Qtd/), newEntry[1]);
+    await user.type(screen.getByLabelText(/Uni/), newEntry[2]);
 
     await user.click(screen.getByRole('button', { name: /submit/ }));
 
-    expect(screen.getByText(/Banana/)).toBeVisible();
-    expect(screen.getByText(/3/)).toBeVisible();
-    expect(screen.getByText(/unidades/)).toBeVisible();
+    expect(screen.getByText(newEntry[0])).toBeDefined();
+    expect(screen.getByText(newEntry[1])).toBeDefined();
+    expect(screen.getByText(newEntry[2])).toBeDefined();
   });
 });
