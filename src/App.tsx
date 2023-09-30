@@ -1,5 +1,7 @@
+import { Dashboard } from './Dashboard';
+
 function App() {
-  return <h1 className=''>Olá, mundo</h1>;
+  return <Dashboard />;
 }
 
 export default App;
