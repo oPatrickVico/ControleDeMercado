@@ -1,3 +1,5 @@
+import { Outlet } from 'react-router-dom';
+
 export function Dashboard() {
   return (
     <main id="App" className="h-100 d-flex flex-nowrap">
@@ -28,6 +30,7 @@ export function Dashboard() {
           </li>
         </ul>
       </header>
+      <Outlet />
     </main>
   );
 }
