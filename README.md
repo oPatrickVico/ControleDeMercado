@@ -16,7 +16,7 @@ Seria bacana se o aplicativo fosse capaz de analisar anúncios de mercado, crian
 # Instalação local
 
 ```bash
-git clone
+git clone git@github.com:oPatrickVico/ControleDeMercado.git
 cd ControleDeGastos
 npm install
 ```
