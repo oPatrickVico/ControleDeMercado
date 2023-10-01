@@ -7,7 +7,7 @@ export function Dashboard() {
     <div id="App" className="h-100 d-flex flex-nowrap">
       <header
         className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
-        style={{ width: 280 }}
+        style={{ width: 150 }}
       >
         <ul className="nav nav-pills nav-flush flex-column mb-auto text-center">
           <li>

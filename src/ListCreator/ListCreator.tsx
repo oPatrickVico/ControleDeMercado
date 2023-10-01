@@ -27,8 +27,16 @@ export default function ListCreator() {
     <main>
       <h1>Criar uma nova lista:</h1>
       <form onSubmit={updateEntries}>
-        <table>
-          <tbody>
+        <table className="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Quantidade</th>
+              <th>Unidades</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody className="table-hover">
             <EntriesBuilder entries={entries} />
             <tr>
               <td>
@@ -50,7 +58,9 @@ export default function ListCreator() {
                 </label>
               </td>
               <td>
-                <button aria-label="submit">+</button>
+                <button className="btn btn-primary" aria-label="submit">
+                  +
+                </button>
               </td>
             </tr>
           </tbody>
@@ -66,6 +76,7 @@ const EntryDisplay: React.FC<ListEntry> = ({ entryName, quantity, units }) => {
       <td>{entryName}</td>
       <td>{quantity}</td>
       <td>{units}</td>
+      <td></td>
     </tr>
   );
 };
