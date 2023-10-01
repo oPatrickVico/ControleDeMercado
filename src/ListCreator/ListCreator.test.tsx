@@ -47,4 +47,24 @@ describe('ListCreator', () => {
     expect(screen.getByText(newEntry[1])).toBeDefined();
     expect(screen.getByText(newEntry[2])).toBeDefined();
   });
+
+  it('deletes present entry', async () => {
+    const newEntry = ['Banana', '3', 'unidades'];
+
+    await user.type(screen.getByLabelText(labels.entryName), newEntry[0]);
+    await user.type(screen.getByLabelText(labels.quantity), newEntry[1]);
+    await user.type(screen.getByLabelText(labels.units), newEntry[2]);
+
+    await user.click(screen.getByRole('button', { name: /submit/ }));
+
+    expect(screen.getByText(newEntry[0])).toBeDefined();
+    expect(screen.getByText(newEntry[1])).toBeDefined();
+    expect(screen.getByText(newEntry[2])).toBeDefined();
+
+    await user.click(screen.getByRole('button', { name: /delete row 1/ }));
+
+    expect(screen.getByText(newEntry[0])).toBeUndefined();
+    expect(screen.getByText(newEntry[1])).toBeUndefined();
+    expect(screen.getByText(newEntry[2])).toBeUndefined();
+  });
 });
