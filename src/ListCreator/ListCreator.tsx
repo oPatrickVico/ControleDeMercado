@@ -6,8 +6,10 @@ type ListEntry = {
   units: string;
 };
 
-export default function ListCreator() {
-  const [entries, setEntries] = React.useState<ListEntry[]>([]);
+const ListCreator: React.FC<{ initialEntries: ListEntry[] }> = ({
+  initialEntries,
+}) => {
+  const [entries, setEntries] = React.useState<ListEntry[]>(initialEntries);
 
   const updateEntries = function (e: FormEvent) {
     e.preventDefault();
@@ -37,7 +39,7 @@ export default function ListCreator() {
             </tr>
           </thead>
           <tbody className="table-hover">
-            <EntriesBuilder entries={entries} />
+            <EntriesBuilder entries={entries} setEntries={setEntries} />
             <tr>
               <td>
                 <label>
@@ -68,26 +70,45 @@ export default function ListCreator() {
       </form>
     </main>
   );
-}
-
-const EntryDisplay: React.FC<ListEntry> = ({ entryName, quantity, units }) => {
-  return (
-    <tr>
-      <td>{entryName}</td>
-      <td>{quantity}</td>
-      <td>{units}</td>
-      <td></td>
-    </tr>
-  );
 };
 
-const EntriesBuilder: React.FC<{ entries: ListEntry[] }> = ({ entries }) => {
+const EntriesBuilder: React.FC<{
+  entries: ListEntry[];
+  setEntries: React.Dispatch<React.SetStateAction<ListEntry[]>>;
+}> = ({ entries, setEntries }) => {
   return entries.map((entry: ListEntry, idx: number) => (
     <EntryDisplay
       key={idx}
       entryName={entry.entryName}
       quantity={entry.quantity}
       units={entry.units}
+      idx={idx}
+      selfDelete={() => {
+        setEntries((arr) => arr.filter((_, delIdx) => idx != delIdx));
+      }}
     />
   ));
 };
+
+const EntryDisplay: React.FC<
+  ListEntry & { idx: number; selfDelete: () => void }
+> = ({ entryName, quantity, units, idx, selfDelete }) => {
+  return (
+    <tr>
+      <td>{entryName}</td>
+      <td>{quantity}</td>
+      <td>{units}</td>
+      <td>
+        <button
+          onClick={selfDelete}
+          aria-label={`excluir ${entryName}`}
+          className="btn btn-primary"
+        >
+          X
+        </button>
+      </td>
+    </tr>
+  );
+};
+
+export default ListCreator;
