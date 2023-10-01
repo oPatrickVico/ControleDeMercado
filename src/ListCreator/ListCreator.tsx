@@ -6,8 +6,8 @@ type ListEntry = {
   units: string;
 };
 
-const ListCreator: React.FC<{ initialEntries: ListEntry[] }> = ({
-  initialEntries,
+const ListCreator: React.FC<{ initialEntries?: ListEntry[] }> = ({
+  initialEntries = [],
 }) => {
   const [entries, setEntries] = React.useState<ListEntry[]>(initialEntries);
 
@@ -82,7 +82,6 @@ const EntriesBuilder: React.FC<{
       entryName={entry.entryName}
       quantity={entry.quantity}
       units={entry.units}
-      idx={idx}
       selfDelete={() => {
         setEntries((arr) => arr.filter((_, delIdx) => idx != delIdx));
       }}
@@ -90,9 +89,12 @@ const EntriesBuilder: React.FC<{
   ));
 };
 
-const EntryDisplay: React.FC<
-  ListEntry & { idx: number; selfDelete: () => void }
-> = ({ entryName, quantity, units, idx, selfDelete }) => {
+const EntryDisplay: React.FC<ListEntry & { selfDelete: () => void }> = ({
+  entryName,
+  quantity,
+  units,
+  selfDelete,
+}) => {
   return (
     <tr>
       <td>{entryName}</td>

@@ -16,7 +16,7 @@ describe('ListCreator', () => {
   const user = userEvent.setup();
 
   it('loads', () => {
-    render(<ListCreator initialEntries={[]} />);
+    render(<ListCreator />);
 
     expect(
       screen.getByRole('heading', { name: /Criar uma nova lista:/i })
