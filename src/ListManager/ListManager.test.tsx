@@ -4,6 +4,14 @@ import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
+import ListManager from './ListManager';
+
 describe('ListManager', () => {
-  it('loads', () => {});
+  render(<ListManager setShoppingLists={() => {}} shoppingLists={[]} />);
+
+  it('loads', () => {
+    expect(
+      screen.getByRole('heading', { name: 'Listas de Compra' })
+    ).toBeInTheDocument();
+  });
 });
