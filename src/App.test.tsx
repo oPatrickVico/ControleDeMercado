@@ -1,0 +1,39 @@
+import { beforeEach, describe, expect, test } from 'vitest';
+
+import { render, screen } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
+import '@testing-library/jest-dom';
+
+import App from './App';
+import { MemoryRouter } from 'react-router-dom';
+
+beforeEach(() => {
+  render(<App />, { wrapper: MemoryRouter });
+});
+
+describe('Integration Tests', () => {
+  const user = userEvent.setup();
+
+  test('Creates and saves a new list on <ListEditor> and display its name on <ListManager>', async () => {
+    const editorLink = screen.getByRole('link', { name: /nova lista/i });
+    await user.click(editorLink);
+
+    const newEntry = ['Banana', '3', 'unidades'];
+    await user.type(screen.getByLabelText(/Nome/i), newEntry[0]);
+    await user.type(screen.getByLabelText(/Qtd/i), newEntry[1]);
+    await user.type(screen.getByLabelText(/Unid/i), newEntry[2]);
+    await user.click(screen.getByRole('button', { name: /submit/ }));
+
+    const dateInput = screen.getByLabelText(/data de compra/i);
+    await user.type(dateInput, '01-01-1970');
+
+    const saveButton = screen.getByRole('button', { name: /salvar lista/i });
+    await user.click(saveButton);
+
+    const managerLink = screen.getByRole('link', { name: /todas as listas/i });
+    await user.click(managerLink);
+
+    expect(screen.getByRole('cell', { name: /nova lista/i }));
+    expect(screen.getByRole('cell', { name: /01\\01\\1970/i }));
+  });
+});

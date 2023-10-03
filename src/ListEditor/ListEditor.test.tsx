@@ -6,11 +6,6 @@ import '@testing-library/jest-dom';
 
 import ListEditor from './ListEditor';
 
-const labels = {
-  entryName: /Nome/i,
-  quantity: /Qtd/i,
-  units: /Uni/i,
-};
 
 describe('ListEditor', () => {
   const user = userEvent.setup();
@@ -23,9 +18,9 @@ describe('ListEditor', () => {
       screen.getByRole('heading', { name: /Criar uma nova lista:/i })
     ).toBeDefined();
     expect(screen.getByDisplayValue(title)).toBeInTheDocument();
-    expect(screen.getByLabelText(labels.entryName)).toBeInTheDocument();
-    expect(screen.getByLabelText(labels.quantity)).toBeInTheDocument();
-    expect(screen.getByLabelText(labels.units)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Nome/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Qtd/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Unid/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'submit' })).toBeInTheDocument();
   });
 
@@ -33,9 +28,9 @@ describe('ListEditor', () => {
     render(<ListEditor initialEntries={[]} />);
     const newEntry = ['Banana', '3', 'unidades'];
 
-    await user.type(screen.getByLabelText(labels.entryName), newEntry[0]);
-    await user.type(screen.getByLabelText(labels.quantity), newEntry[1]);
-    await user.type(screen.getByLabelText(labels.units), newEntry[2]);
+    await user.type(screen.getByLabelText(/Nome/i), newEntry[0]);
+    await user.type(screen.getByLabelText(/Qtd/i), newEntry[1]);
+    await user.type(screen.getByLabelText(/Unid/i), newEntry[2]);
 
     await user.click(screen.getByRole('button', { name: /submit/ }));
 

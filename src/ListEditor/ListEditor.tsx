@@ -67,7 +67,7 @@ function ListEditor({
               </td>
               <td>
                 <label>
-                  Uni:&nbsp;
+                  Unid:&nbsp;
                   <input type="text" name="units" />
                 </label>
               </td>
