@@ -1,10 +1,15 @@
 import React, { FormEvent } from 'react';
 import { ListEntry } from '../App';
 
-const ListEditor: React.FC<{
+interface ListEditorProps {
   initialEntries?: ListEntry[];
   listTitle?: string;
-}> = ({ initialEntries = [], listTitle = 'Nova lista' }) => {
+}
+
+function ListEditor({
+  initialEntries = [],
+  listTitle = 'Nova lista',
+}: ListEditorProps) {
   const [entries, setEntries] = React.useState<ListEntry[]>(initialEntries);
 
   const updateEntries = function (e: FormEvent) {
@@ -77,12 +82,14 @@ const ListEditor: React.FC<{
       </form>
     </main>
   );
-};
+}
 
-const EntriesBuilder: React.FC<{
+type EntriesBuilderProps = {
   entries: ListEntry[];
   setEntries: React.Dispatch<React.SetStateAction<ListEntry[]>>;
-}> = ({ entries, setEntries }) => {
+};
+
+function EntriesBuilder({ entries, setEntries }: EntriesBuilderProps) {
   return entries.map((entry: ListEntry, idx: number) => (
     <EntryDisplay
       key={idx}
@@ -94,14 +101,18 @@ const EntriesBuilder: React.FC<{
       }}
     />
   ));
+}
+
+type EntryDisplayProps = ListEntry & {
+  selfDelete: () => void;
 };
 
-const EntryDisplay: React.FC<ListEntry & { selfDelete: () => void }> = ({
+function EntryDisplay({
   entryName,
   quantity,
   units,
   selfDelete,
-}) => {
+}: EntryDisplayProps) {
   return (
     <tr>
       <td>{entryName}</td>
@@ -118,6 +129,6 @@ const EntryDisplay: React.FC<ListEntry & { selfDelete: () => void }> = ({
       </td>
     </tr>
   );
-};
+}
 
 export default ListEditor;
