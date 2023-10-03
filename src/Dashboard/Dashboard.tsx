@@ -2,7 +2,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 const linkCss = 'nav-link py-3 rounded-0 text-bg-dark p3 ';
 
-export function Dashboard() {
+export default function Dashboard() {
   return (
     <div id="App" className="h-100 d-flex flex-nowrap">
       <header

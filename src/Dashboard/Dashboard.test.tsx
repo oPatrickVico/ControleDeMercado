@@ -5,7 +5,7 @@ import { userEvent } from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
 import { MemoryRouter } from 'react-router-dom';
-import App from './App';
+import App from '../App';
 
 beforeEach(() => {
   render(<App />, { wrapper: MemoryRouter });

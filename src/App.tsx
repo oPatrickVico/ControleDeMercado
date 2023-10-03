@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
-import { Dashboard } from './Dashboard';
 import ListEditor from './ListEditor/ListEditor';
 import React from 'react';
 import ListManager from './ListManager/ListManager';
+import Dashboard from './Dashboard/Dashboard';
 
 function App() {
   const [shoppingList, setShoppingLists] = React.useState<ShoppingList[]>([]);
