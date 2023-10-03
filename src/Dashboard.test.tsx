@@ -14,11 +14,21 @@ beforeEach(() => {
 describe('Dashboard', () => {
   const user = userEvent.setup();
 
-  it('routes to /newList', async () => {
-    const link = screen.getByText(/Nova lista/i);
+  it('routes to /list-editor', async () => {
+    const link = screen.getByRole('link', { name: /Nova lista/i });
 
     await user.click(link);
 
-    expect(screen.getByText(/Criar uma nova lista:/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Criar uma nova lista:/i })
+    ).toBeInTheDocument();
+  });
+
+  it('routes to /list-manager', async () => {
+    const link = screen.getByRole('link', { name: /Todas as listas/i });
+
+    await user.click(link);
+
+    expect(screen.getByRole('heading', { name: /Listas de Compra/i }));
   });
 });

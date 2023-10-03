@@ -2,7 +2,7 @@ import { ShoppingList, StateSetter } from '../App';
 
 type ListManagerProps = {
   shoppingLists: ShoppingList[];
-  setShoppingLists: StateSetter<ListManagerProps[]>;
+  setShoppingLists: StateSetter<ShoppingList[]>;
 };
 
 export default function ListManager({

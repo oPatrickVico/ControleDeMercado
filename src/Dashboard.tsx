@@ -16,24 +16,9 @@ export function Dashboard() {
             </Link>
           </li>
           <li>
-            <a href="/" className={linkCss}>
-              Pending Lists
-            </a>
-          </li>
-          <li>
-            <a href="/" className={linkCss}>
-              Past Lists
-            </a>
-          </li>
-          <li>
-            <a href="/" className={linkCss}>
-              Template Lists
-            </a>
-          </li>
-          <li>
-            <a href="/" className={linkCss}>
-              Trash List
-            </a>
+            <Link to="list-manager" className={linkCss}>
+              Todas as Listas
+            </Link>
           </li>
         </ul>
       </header>
