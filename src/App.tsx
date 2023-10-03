@@ -11,7 +11,10 @@ function App() {
     // Usei Routes em vez dum router pois pretendo usar dois tipos: Um pra produção (BrowserRouter), outro pra testes (MemoryRouter). Usar Routes como root facilita os testes por deixar o componente portável (encaixa em qualquer lugar).
     <Routes>
       <Route path="/" element={<Dashboard />}>
-        <Route path="list-editor" element={<ListEditor />} />
+        <Route
+          path="list-editor"
+          element={<ListEditor setShoppingLists={setShoppingLists} />}
+        />
         <Route
           path="list-manager"
           element={
@@ -28,17 +31,14 @@ function App() {
 
 export type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 
-export enum ListStatus {
-  pending,
-  done,
-  deleted,
-}
+export type ListStatus = 'pending' | 'done' | 'deleted';
 
 export type ShoppingList = {
-  id: string;
-  createdAt: Date;
+  createdAt: string;
+  dueTo: string;
   status: ListStatus;
   list: ListEntry[];
+  listTitle: string;
 };
 
 export type ListEntry = {

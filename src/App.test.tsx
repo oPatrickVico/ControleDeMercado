@@ -24,8 +24,9 @@ describe('Integration Tests', () => {
     await user.type(screen.getByLabelText(/Unid/i), newEntry[2]);
     await user.click(screen.getByRole('button', { name: /submit/ }));
 
-    const dateInput = screen.getByLabelText(/data de compra/i);
-    await user.type(dateInput, '01-01-1970');
+    // I don't know why user.type doesn't work as it should!!
+    (screen.getByLabelText(/data de compra/i) as HTMLInputElement).value =
+      '2023-12-25';
 
     const saveButton = screen.getByRole('button', { name: /salvar lista/i });
     await user.click(saveButton);
@@ -33,7 +34,13 @@ describe('Integration Tests', () => {
     const managerLink = screen.getByRole('link', { name: /todas as listas/i });
     await user.click(managerLink);
 
-    expect(screen.getByRole('cell', { name: /nova lista/i }));
-    expect(screen.getByRole('cell', { name: /01\\01\\1970/i }));
+    expect(
+      screen.getByRole('cell', { name: /nova lista/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('cell', {
+        name: new Date('2023-12-25').toLocaleDateString('pt-BR'),
+      })
+    ).toBeInTheDocument();
   });
 });

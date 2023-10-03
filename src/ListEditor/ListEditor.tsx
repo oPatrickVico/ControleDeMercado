@@ -1,14 +1,16 @@
 import React, { FormEvent } from 'react';
-import { ListEntry } from '../App';
+import { ListEntry, ShoppingList, StateSetter } from '../App';
 
 interface ListEditorProps {
   initialEntries?: ListEntry[];
   listTitle?: string;
+  setShoppingLists: StateSetter<ShoppingList[]>;
 }
 
 function ListEditor({
   initialEntries = [],
   listTitle = 'Nova lista',
+  setShoppingLists,
 }: ListEditorProps) {
   const [entries, setEntries] = React.useState<ListEntry[]>(initialEntries);
 
@@ -26,16 +28,36 @@ function ListEditor({
     (document.querySelector('input[name="entryName"]') as HTMLElement).focus();
   };
 
+  const saveList = () => {
+    // @REFACTOR USE FORM
+
+    const dueDate = new Date(
+      (document.getElementById('dueTo')! as HTMLInputElement).value
+    ).toLocaleDateString('pt-BR');
+
+    const newList: ShoppingList = {
+      createdAt: new Date().toLocaleDateString('pt-BR'),
+      dueTo: dueDate,
+      status: 'pending',
+      list: entries,
+      listTitle: (document.getElementById('listTitle')! as HTMLInputElement)
+        .value,
+    };
+
+    setShoppingLists((arr) => arr.concat(newList));
+  };
+
   return (
     <main>
       <h1>Criar uma nova lista:</h1>
       <label>
         Título
-        <input type="text" defaultValue={listTitle} />
+        <input id="listTitle" type="text" defaultValue={listTitle} />
       </label>
       <label>
         Data de Compra:
         <input
+          id="dueTo"
           type="date"
           defaultValue={new Date().toISOString().slice(0, 10)}
         />
@@ -80,6 +102,9 @@ function ListEditor({
           </tbody>
         </table>
       </form>
+      <button className="btn btn-primary" onClick={saveList}>
+        Salvar Lista
+      </button>
     </main>
   );
 }
