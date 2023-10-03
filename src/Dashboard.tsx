@@ -11,7 +11,7 @@ export function Dashboard() {
       >
         <ul className="nav nav-pills nav-flush flex-column mb-auto text-center">
           <li>
-            <Link to="newList" className={linkCss}>
+            <Link to="list-editor" className={linkCss}>
               Nova lista
             </Link>
           </li>

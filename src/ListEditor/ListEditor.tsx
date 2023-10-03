@@ -1,12 +1,7 @@
 import React, { FormEvent } from 'react';
+import { ListEntry } from '../App';
 
-type ListEntry = {
-  entryName: string;
-  quantity: string;
-  units: string;
-};
-
-const ListCreator: React.FC<{
+const ListEditor: React.FC<{
   initialEntries?: ListEntry[];
   listTitle?: string;
 }> = ({ initialEntries = [], listTitle = 'Nova lista' }) => {
@@ -125,4 +120,4 @@ const EntryDisplay: React.FC<ListEntry & { selfDelete: () => void }> = ({
   );
 };
 
-export default ListCreator;
+export default ListEditor;

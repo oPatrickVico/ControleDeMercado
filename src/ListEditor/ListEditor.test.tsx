@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
-import ListCreator from './ListCreator';
+import ListEditor from './ListEditor';
 
 const labels = {
   entryName: /Nome/i,
@@ -12,12 +12,12 @@ const labels = {
   units: /Uni/i,
 };
 
-describe('ListCreator', () => {
+describe('ListEditor', () => {
   const user = userEvent.setup();
 
   it('loads with proper title', () => {
     const title = 'Test List';
-    render(<ListCreator listTitle={title} />);
+    render(<ListEditor listTitle={title} />);
 
     expect(
       screen.getByRole('heading', { name: /Criar uma nova lista:/i })
@@ -30,7 +30,7 @@ describe('ListCreator', () => {
   });
 
   it('adds new entry', async () => {
-    render(<ListCreator initialEntries={[]} />);
+    render(<ListEditor initialEntries={[]} />);
     const newEntry = ['Banana', '3', 'unidades'];
 
     await user.type(screen.getByLabelText(labels.entryName), newEntry[0]);
@@ -50,7 +50,7 @@ describe('ListCreator', () => {
       quantity: '3',
       units: 'unidades',
     };
-    render(<ListCreator initialEntries={[entry]} />);
+    render(<ListEditor initialEntries={[entry]} />);
 
     expect(screen.getByText(entry.entryName)).toBeInTheDocument();
     expect(screen.getByText(entry.quantity)).toBeInTheDocument();
@@ -82,7 +82,7 @@ describe('ListCreator', () => {
       },
     ];
 
-    render(<ListCreator initialEntries={entries} />);
+    render(<ListEditor initialEntries={entries} />);
 
     expect(screen.getByText(entries[0].entryName)).toBeInTheDocument();
     expect(screen.getByText(entries[1].entryName)).toBeInTheDocument();
