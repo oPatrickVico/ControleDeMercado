@@ -13,5 +13,11 @@ describe('ListManager', () => {
     expect(
       screen.getByRole('heading', { name: 'Listas de Compra' })
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole('columnheader', { name: /Nome/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('columnheader', { name: /Data/i })
+    ).toBeInTheDocument();
   });
 });
