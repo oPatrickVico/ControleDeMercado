@@ -6,9 +6,10 @@ type ListEntry = {
   units: string;
 };
 
-const ListCreator: React.FC<{ initialEntries?: ListEntry[] }> = ({
-  initialEntries = [],
-}) => {
+const ListCreator: React.FC<{
+  initialEntries?: ListEntry[];
+  listTitle?: string;
+}> = ({ initialEntries = [], listTitle = 'Nova lista' }) => {
   const [entries, setEntries] = React.useState<ListEntry[]>(initialEntries);
 
   const updateEntries = function (e: FormEvent) {
@@ -28,6 +29,17 @@ const ListCreator: React.FC<{ initialEntries?: ListEntry[] }> = ({
   return (
     <main>
       <h1>Criar uma nova lista:</h1>
+      <label>
+        Título
+        <input type="text" defaultValue={listTitle} />
+      </label>
+      <label>
+        Data de Compra:
+        <input
+          type="date"
+          defaultValue={new Date().toISOString().slice(0, 10)}
+        />
+      </label>
       <form onSubmit={updateEntries}>
         <table className="table table-striped table-hover">
           <thead>

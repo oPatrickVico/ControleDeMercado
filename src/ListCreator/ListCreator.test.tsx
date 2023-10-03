@@ -15,12 +15,14 @@ const labels = {
 describe('ListCreator', () => {
   const user = userEvent.setup();
 
-  it('loads', () => {
-    render(<ListCreator />);
+  it('loads with proper title', () => {
+    const title = 'Test List';
+    render(<ListCreator listTitle={title} />);
 
     expect(
       screen.getByRole('heading', { name: /Criar uma nova lista:/i })
     ).toBeDefined();
+    expect(screen.getByDisplayValue(title)).toBeInTheDocument();
     expect(screen.getByLabelText(labels.entryName)).toBeInTheDocument();
     expect(screen.getByLabelText(labels.quantity)).toBeInTheDocument();
     expect(screen.getByLabelText(labels.units)).toBeInTheDocument();
